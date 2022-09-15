@@ -1,5 +1,9 @@
 # 2.1 구구단 6단을 계산하여 결과를 순서대로 출력하는 코드를 for문을 이용하여 구현하라.
 
+import string
+from tempfile import tempdir
+
+
 def gugudan(n):
     for i in range(1,10):
         print(n * i)
@@ -95,3 +99,71 @@ def sumHarmonicSeries(n , sum = 0):
 # 2.13 이항계수(binomial coefficient)를 계산하는 순환함수를 작성하라. 이항계수는 다음과 같이 순환적으로 정의 된다.
 #n_C_k = n-1_C_k-1 + n-1_C_k if 0< k < n
 #      = 1 if k = 0 or k = n
+
+
+        
+def cal_binomialCoefficient(n,k):
+    
+    if k == 0 or k ==n:
+        return 1
+    return cal_binomialCoefficient(n-1 , k - 1 ) + cal_binomialCoefficient(n-1 , k)
+
+
+# 2.14 이항계수를 구하는 함수를 반복 구조로 구현하라
+
+def factorial(n):
+    value = 1
+    for i in range(1,n+1):
+        value *= i
+    return value
+
+def cal_binomicalCoeffincient2(n,k):
+    return factorial(n) // (factorial(k) * factorial(n-k))
+
+# 2.15 문자열의 내용을 반대로 바꾸는 순환적인 함수 reverse()를 구현하라.
+# 예를 들어 reverse("ABCDE") 는 "EDCBA"를 반환해야한다.
+
+def reverse(str : string):
+    revStr =""
+    for i in range(1,len(str)+1):
+        revStr += str[-i]
+        
+    return revStr
+
+# 2.16 순환을 사용하여 1부터 n 까지의 숫자를 화면에 순서대로 출력하는 함수 printNum(n)과
+# 역순으로 출력하는 함수 printRevNum(n)을 작성하라.
+# 다음은 각각 printNum(10)과 printRevNum(10)의 출력 결과이다.
+
+# 1 2 3 4 5 6 7 8 9 10
+# 10 9 8 7 6 5 4 3 2 1
+
+def printNum(n):
+    for i in range(1,n+1):
+        print(i, end = " ")
+
+def printRevNum(n : int):
+    for i in range(n ,0 , -1):
+        print(i, end = " ")
+
+# 2.17 순환적인 방법으로 피보나치 수열을 호출하였을 때 함수가 중복되어 호출되는 것을
+# 확인할 수 있도록 각 함수의 매개 변수별 호출 빈도를 측정해 출력하라
+
+
+class Fibo:
+
+    def fibo(self, n, temp):
+        temp[n] += 1
+        if n < 2:
+            return n
+        return self.fibo(n-1,temp) + self.fibo(n-2,temp)
+n = 7
+temp = dict()
+for i in range(0, n +1 ):
+    temp[i] = 0
+a=Fibo()
+a.fibo(n,temp)
+for i in range(0 , n+1):
+    print(f"Fibo({i}) = {temp[i]}번")
+
+
+
