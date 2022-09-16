@@ -1,7 +1,9 @@
 # 2.1 구구단 6단을 계산하여 결과를 순서대로 출력하는 코드를 for문을 이용하여 구현하라.
 
+from random import randrange, uniform
 import string
 from tempfile import tempdir
+from turtle import up
 
 
 def gugudan(n):
@@ -149,21 +151,58 @@ def printRevNum(n : int):
 # 확인할 수 있도록 각 함수의 매개 변수별 호출 빈도를 측정해 출력하라
 
 
-class Fibo:
 
-    def fibo(self, n, temp):
-        temp[n] += 1
-        if n < 2:
-            return n
-        return self.fibo(n-1,temp) + self.fibo(n-2,temp)
-n = 7
-temp = dict()
-for i in range(0, n +1 ):
-    temp[i] = 0
-a=Fibo()
-a.fibo(n,temp)
-for i in range(0 , n+1):
-    print(f"Fibo({i}) = {temp[i]}번")
+def fibo( n, temp):
+    temp[n] += 1
+    if n < 2:
+        return n
+    return fibo(n-1,temp) + fibo(n-2,temp)
+
+# n = 7
+
+# temp = dict()
+# for i in range(0, n +1 ):
+#     temp[i] = 0
+
+# fibo(7,temp)
+# for i in range(0 , n+1):
+#     print(f"Fibo({i}) = {temp[i]}번")
+
+# ****************실습문제*****************************
+
+# 2.2 번호 맞히기 게임을 구현하자. 숨겨진 두자리의 숫자를 추측하여 맞추는 것이다.
+# 게이머가 숫자를 예측하면 컴퓨터는 정답을 비교하여 
+
+# "더 큰 숫자입니다." 나 "더작은 숫자입니다." 그리고 맞힌 경우 "정답입니다."를 출력한다.
+# 중간에 맞히거나 10번 동안 맞히지 못하면 게임이 끝난다.
+
+# 정답을 answer 추츩 문자를 guess라 하면, answer와 huess를 비교하여 결과를 출력하면 된다.
+# 정답 범위를 힌트로 제공하기 위해 min과 max변수를 사용한다.
+
+# 반복문으로는 for를 사용하고 최대 10번 반복하면서, 중간에 정답을 맞히면 break문을 이용해 루프를 빠져나와 게임을 종료한다.
 
 
 
+def upAndDownGame(n):
+    numRange = [0, 100]
+    for i in range(0, 10):
+        
+        print(f"숫자를 입력하세요.(범위:{numRange[0]} ~ {numRange[1]}) : " , end = " ")
+        a = int(input())
+        if a == n :
+            print(f"정답입니다. {i+1}번 만에 맞추셨습니다.")
+            print("게임이 끝났습니다.")
+            break
+        elif a < n:
+            print("아닙니다. 더 큰 숫자입니다.")
+            numRange[0] = a
+        else:
+            print("아닙니다. 더 작은 숫자입니다.")
+            numRange[1] = a
+
+import os
+n = randrange(100)
+
+while(True):
+    upAndDownGame(n)
+    os.system("pause")
