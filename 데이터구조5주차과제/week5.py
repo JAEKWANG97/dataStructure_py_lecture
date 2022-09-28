@@ -82,7 +82,6 @@ def checkBracketV2(lines):
     stack = Stack()
     i = 1
     for line in lines:
-        
         print(line)
         j = 1
         for ch in line:
